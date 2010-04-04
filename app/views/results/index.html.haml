@@ -1,8 +1,10 @@
 %h2 Listing results
-- if !@results.empty?
-  .results
-    = render :partial => "result", :collection => @results
-  = will_paginate(@results)
-- else
-  %p There are no results to show yet.
+- current_user.questions.each do |question|
+  %h3= question.title
+  
+  %table(border="1")
+    - question.results.each do |result|
+      %tr
+        %td= l result.date
+        %td= result.value
 = link_to 'New result', new_result_path

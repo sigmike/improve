@@ -3,7 +3,7 @@
   %p
     = f.label :question_id
     %br
-    = f.select :question_id, Question.all.map { |question| [question.title, question.id] }
+    = f.select :question_id, current_user.questions.map { |question| [question.title, question.id] }
   %p
     = f.label :date
     %br

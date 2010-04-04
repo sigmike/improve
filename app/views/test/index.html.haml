@@ -2,7 +2,7 @@
   %h1 Questions
   Date :
   = select_datetime
-  - Question.all.each do |question|
+  - current_user.questions.each do |question|
     %h2= question.title
     = hidden_field_tag "result[#{question.id}]"
     %div(style="margin: 1em;")
