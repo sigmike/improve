@@ -5,7 +5,9 @@ class QuestionsController < ApplicationController
   QUESTIONS_PER_PAGE = 20
 
   def create
-    @question = Question.new(params[:question])
+    attributes = params[:question].dup
+    attributes[:user_id] = current_user.id
+    @question = Question.new(attributes)
     respond_to do |format|
       if @question.save
         flash[:notice] = 'Question was successfully created.'
@@ -33,7 +35,7 @@ class QuestionsController < ApplicationController
   end
 
   def index
-    @questions = Question.paginate(:page => params[:page], :per_page => QUESTIONS_PER_PAGE)
+    @questions = Question.paginate(:page => params[:page], :per_page => QUESTIONS_PER_PAGE, :conditions => ["user_id=?", current_user.id])
     respond_to do |format|
       format.html
       format.xml  { render :xml => @questions }
@@ -74,7 +76,10 @@ class QuestionsController < ApplicationController
   private
 
   def find_question
-    @question = Question.find(params[:id]) if params[:id]
+    if params[:id]
+      @question = Question.find(params[:id])
+      raise ArgumentError, "Invalid question" if @question.user_id != current_user.id
+    end
   end
 
 end

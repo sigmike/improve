@@ -2,19 +2,28 @@ require 'test_helper'
 
 class ResultsControllerTest < ActionController::TestCase
   def setup
-    create_user_and_sign_in
+    @user = users(:bob)
+    sign_in @user
+    @question = Question.create :user => @user
   end
   
 
   test "should create result" do
     Result.any_instance.expects(:save).returns(true)
-    post :create, :result => { }
+    post :create, :result => { :question_id => @question.id }
     assert_response :redirect
+  end
+
+  test "should not allow creation when question is owned by another users" do
+    question = Question.create :user => users(:two)
+    assert_raises ArgumentError do
+      post :create, :result => { :question_id => question.id.to_s }
+    end
   end
 
   test "should handle failure to create result" do
     Result.any_instance.expects(:save).returns(false)
-    post :create, :result => { }
+    post :create, :result => { :question_id => @question.id }
     assert_template "new"
   end
 
@@ -55,14 +64,36 @@ class ResultsControllerTest < ActionController::TestCase
 
   test "should update result" do
     Result.any_instance.expects(:save).returns(true)
-    put :update, :id => results(:one).to_param, :result => { }
+    put :update, :id => results(:one).to_param, :result => { :question_id => results(:one).question_id }
     assert_response :redirect
   end
 
   test "should handle failure to update result" do
     Result.any_instance.expects(:save).returns(false)
-    put :update, :id => results(:one).to_param, :result => { }
+    put :update, :id => results(:one).to_param, :result => { :question_id => results(:one).question_id }
     assert_template "edit"
   end
+  
+  test "should not allow update on other user's question" do
+    question = Question.create :user => users(:two)
+    assert_raises ArgumentError do
+      put :update, :id => results(:one).to_param, :result => { :question_id => question.id }
+    end
+  end
 
+  [
+    [:get, :edit],
+    [:post, :update],
+    [:get, :show],
+    [:delete, :destroy],
+  ].each do |method, action|
+    test "can not #{method} #{action} other user's question" do
+      user = User.create! :email => "bob", :password => "mock"
+      question = Question.create! :user => user
+      result = Result.create! :question => question
+      assert_raises ArgumentError do
+        send(method, action, :id => result.id.to_s)
+      end
+    end
+  end
 end

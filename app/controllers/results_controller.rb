@@ -6,6 +6,9 @@ class ResultsController < ApplicationController
 
   def create
     @result = Result.new(params[:result])
+    if @result.question.user_id != current_user.id
+      raise ArgumentError, "Invalid question"
+    end
     respond_to do |format|
       if @result.save
         flash[:notice] = 'Result was successfully created.'
@@ -59,6 +62,10 @@ class ResultsController < ApplicationController
   end
 
   def update
+    question = Question.find(params[:result][:question_id])
+    if question.user_id != current_user.id
+      raise ArgumentError, "Invalid question"
+    end
     respond_to do |format|
       if @result.update_attributes(params[:result])
         flash[:notice] = 'Result was successfully updated.'
@@ -74,7 +81,10 @@ class ResultsController < ApplicationController
   private
 
   def find_result
-    @result = Result.find(params[:id]) if params[:id]
+    if params[:id]
+      @result = Result.find(params[:id])
+      raise ArgumentError, "Invalid result" if @result.question.user_id != current_user.id
+    end
   end
 
 end

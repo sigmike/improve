@@ -41,7 +41,7 @@ class ActionController::TestCase
   include Devise::TestHelpers
   
   def create_user_and_sign_in
-    user = User.create! :email => "bob@example.com", :password => "foo"
-    sign_in user
+    @user = User.create! :email => "new_user@example.com", :password => "foo"
+    sign_in @user
   end
 end

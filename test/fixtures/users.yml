@@ -1,0 +1,15 @@
+
+one:
+  email: one@example.com
+  encrypted_password: foo
+  password_salt: foo
+  
+two:
+  email: two@example.com
+  encrypted_password: foo
+  password_salt: foo
+  
+bob:
+  email: bob@example.com
+  encrypted_password: foo
+  password_salt: foo
