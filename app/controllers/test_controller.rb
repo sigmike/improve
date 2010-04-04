@@ -1,6 +1,6 @@
 class TestController < ApplicationController
   def save
-    date = DateTime.new(
+    date = Time.zone.local(
       params[:date][:year].to_i,
       params[:date][:month].to_i, 
       params[:date][:day].to_i,
