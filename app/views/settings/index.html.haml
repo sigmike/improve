@@ -1,0 +1,4 @@
+- form_tag :action => "save" do
+  = select_tag :time_zone, options_for_select(ActiveSupport::TimeZone.all.map { |tz| [tz.to_s, tz.name] }, Time.zone.name)
+  = submit_tag
+  
