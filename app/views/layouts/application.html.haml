@@ -10,11 +10,15 @@
     = javascript_include_tag "slider"
   %body
     #wrapper
+      - if user_signed_in?
+        %div(style="text-align:right;")
+          = link_to 'Sign out', destroy_user_session_path
       #content
         %h1 Improve
         #flash
           - unless flash.empty?
             = content_tag :div, flash[:notice],  :class => "notice"  if flash[:notice]
+            = content_tag :div, flash[:alert],   :class => "warning" if flash[:alert]
             = content_tag :div, flash[:warning], :class => "warning" if flash[:warning]
             = content_tag :div, flash[:error],   :class => "error"   if flash[:error]
           :javascript
