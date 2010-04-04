@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class QuestionTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test "results are destroyed when question is destroyed" do
+    question = questions(:one)
+    assert Result.count(:conditions => ["question_id = ?", question.id]) > 0
+    question.destroy
+    assert Result.count(:conditions => ["question_id = ?", question.id]) == 0
   end
 end
