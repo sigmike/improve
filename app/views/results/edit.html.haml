@@ -1,0 +1,6 @@
+%h2 Editing result
+= render :partial => "form", :locals => {:result => @result}
+%ul
+  %li= link_to 'Show', @result
+  %li= link_to 'Back', results_path
+  %li= link_to 'Destroy', @result, :confirm => 'Are you sure?', :method => :delete  

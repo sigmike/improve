@@ -1,0 +1,4 @@
+%h2 New question
+= render :partial => "form", :locals => {:question => @question}
+%ul
+  %li= link_to 'Back', questions_path

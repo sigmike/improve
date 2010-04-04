@@ -1,0 +1,8 @@
+%h2 Listing results
+- if !@results.empty?
+  .results
+    = render :partial => "result", :collection => @results
+  = will_paginate(@results)
+- else
+  %p There are no results to show yet.
+= link_to 'New result', new_result_path

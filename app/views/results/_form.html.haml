@@ -1,0 +1,20 @@
+- form_for(result) do |f|
+  = f.error_messages
+  %p
+    = f.label :question_id
+    %br
+    = f.text_field :question_id
+  %p
+    = f.label :date
+    %br
+    = f.datetime_select :date
+  %p
+    = f.label :value
+    %br
+    = f.text_field :value
+  %p
+    = f.label :comment
+    %br
+    = f.text_field :comment
+  %p
+    = f.submit "Submit"

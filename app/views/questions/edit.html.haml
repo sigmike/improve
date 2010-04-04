@@ -1,0 +1,6 @@
+%h2 Editing question
+= render :partial => "form", :locals => {:question => @question}
+%ul
+  %li= link_to 'Show', @question
+  %li= link_to 'Back', questions_path
+  %li= link_to 'Destroy', @question, :confirm => 'Are you sure?', :method => :delete  

@@ -1,0 +1,18 @@
+%h2= "Result \"#{@result.to_param}\""
+- content_tag_for :div, @result do
+  %ul
+    %li
+      %strong Question:
+      =h @result.question_id
+    %li
+      %strong Date:
+      =h @result.date
+    %li
+      %strong Value:
+      =h @result.value
+    %li
+      %strong Comment:
+      =h @result.comment
+%ul
+  %li= link_to 'Edit', edit_result_path(@result)
+  %li= link_to 'Back', results_path

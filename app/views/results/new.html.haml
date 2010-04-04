@@ -1,0 +1,4 @@
+%h2 New result
+= render :partial => "form", :locals => {:result => @result}
+%ul
+  %li= link_to 'Back', results_path

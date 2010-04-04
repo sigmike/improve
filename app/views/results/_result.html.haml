@@ -1,0 +1,17 @@
+- content_tag_for :div, result do
+  %ul
+    %li
+      %strong Question:
+      =h result.question_id
+    %li
+      %strong Date:
+      =h result.date
+    %li
+      %strong Value:
+      =h result.value
+    %li
+      %strong Comment:
+      =h result.comment
+    = link_to 'Show', result
+    = link_to 'Edit', edit_result_path(result)
+    = link_to 'Destroy', result, :confirm => 'Are you sure?', :method => :delete

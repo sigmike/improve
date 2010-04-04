@@ -1,0 +1,16 @@
+- form_for(question) do |f|
+  = f.error_messages
+  %p
+    = f.label :title
+    %br
+    = f.text_field :title
+  %p
+    = f.label :min_title
+    %br
+    = f.text_field :min_title
+  %p
+    = f.label :max_title
+    %br
+    = f.text_field :max_title
+  %p
+    = f.submit "Submit"

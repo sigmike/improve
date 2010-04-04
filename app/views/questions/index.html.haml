@@ -1,0 +1,8 @@
+%h2 Listing questions
+- if !@questions.empty?
+  .questions
+    = render :partial => "question", :collection => @questions
+  = will_paginate(@questions)
+- else
+  %p There are no questions to show yet.
+= link_to 'New question', new_question_path

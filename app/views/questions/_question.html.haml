@@ -1,0 +1,14 @@
+- content_tag_for :div, question do
+  %ul
+    %li
+      %strong Title:
+      =h question.title
+    %li
+      %strong Min title:
+      =h question.min_title
+    %li
+      %strong Max title:
+      =h question.max_title
+    = link_to 'Show', question
+    = link_to 'Edit', edit_question_path(question)
+    = link_to 'Destroy', question, :confirm => 'Are you sure?', :method => :delete
