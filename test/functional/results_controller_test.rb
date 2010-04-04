@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class ResultsControllerTest < ActionController::TestCase
+  def setup
+    create_user_and_sign_in
+  end
+  
 
   test "should create result" do
     Result.any_instance.expects(:save).returns(true)

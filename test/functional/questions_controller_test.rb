@@ -1,7 +1,10 @@
 require 'test_helper'
 
 class QuestionsControllerTest < ActionController::TestCase
-
+  def setup
+    create_user_and_sign_in
+  end
+  
   test "should create question" do
     Question.any_instance.expects(:save).returns(true)
     post :create, :question => { }

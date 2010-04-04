@@ -13,6 +13,7 @@
           %img(src="images/slider-images-handle.png" alt="" style="display: inline;")
       %div(style="width: 15em; display: inline-block; text-align: left; margin: 0.5em;")
         = question.max_title
+      = check_box_tag "save[#{question.id}]"
       :javascript
-        new Control.Slider("handle_#{question.id}", "track_#{question.id}", {sliderValue: 0.5, onChange: function(v) { $('result_#{question.id}').value = v; }});
+        new Control.Slider("handle_#{question.id}", "track_#{question.id}", {sliderValue: 0.5, onChange: function(v) { $('result_#{question.id}').value = v; $('save_#{question.id}').checked = true; }});
   = submit_tag

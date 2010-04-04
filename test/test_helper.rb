@@ -36,3 +36,12 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+class ActionController::TestCase
+  include Devise::TestHelpers
+  
+  def create_user_and_sign_in
+    user = User.create! :email => "bob@example.com", :password => "foo"
+    sign_in user
+  end
+end

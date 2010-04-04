@@ -8,8 +8,9 @@ class TestController < ApplicationController
       params[:date][:minute].to_i
     )
     params[:result].each do |question_id, value|
-      Result.create! :question_id => question_id, :value => value, :date => date
-
+      if params[:save][question_id] == "1"
+        Result.create! :question_id => question_id, :value => value, :date => date
+      end
     end
   end
 end
