@@ -1,0 +1,18 @@
+%h2= "Activity \"#{@activity.to_param}\""
+- content_tag_for :div, @activity do
+  %ul
+    %li
+      %strong Title:
+      =h @activity.title
+    %li
+      %strong Start:
+      =h @activity.start
+    %li
+      %strong Stop:
+      =h @activity.stop
+    %li
+      %strong Comment:
+      =h @activity.comment
+%ul
+  %li= link_to 'Edit', edit_activity_path(@activity)
+  %li= link_to 'Back', activities_path

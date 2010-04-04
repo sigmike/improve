@@ -1,0 +1,4 @@
+%h2 New activity
+= render :partial => "form", :locals => {:activity => @activity}
+%ul
+  %li= link_to 'Back', activities_path

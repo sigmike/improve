@@ -1,0 +1,8 @@
+%h2 Listing activities
+- if !@activities.empty?
+  .activities
+    = render :partial => "activity", :collection => @activities
+  = will_paginate(@activities)
+- else
+  %p There are no activities to show yet.
+= link_to 'New activity', new_activity_path
