@@ -7,4 +7,7 @@
       %tr
         %td= l result.date
         %td= result.value
+        %td= link_to 'Show', result
+        %td= link_to 'Edit', edit_result_path(result)
+        %td= link_to 'Destroy', result, :confirm => 'Are you sure?', :method => :delete
 = link_to 'New result', new_result_path
